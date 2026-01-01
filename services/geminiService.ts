@@ -1,6 +1,6 @@
 import { SNAFU_EVENTS, SNAFU_MATERIALS } from "../constants";
 
-export const generateAdventureEvent = async (location: string): Promise<{ text: string; material: string; quantity: number; title: {en: string, zh: string} }> => {
+export const generateAdventureEvent = async (location: string): Promise<{ text: string; material: string; quantity: number; title: {en: string, zh: string}, rank: 'C' | 'B' | 'A' | 'S' }> => {
   // Simulate network delay for "realism"
   await new Promise(resolve => setTimeout(resolve, 500));
 
@@ -20,7 +20,8 @@ export const generateAdventureEvent = async (location: string): Promise<{ text: 
     text: `${verboseLocation}. ${randomEvent.text}`,
     material: randomEvent.quantity > 0 ? randomMaterial : "nothing",
     quantity: randomEvent.quantity > 0 ? Math.floor(Math.random() * 5) + 1 : 0,
-    title: finalTitle
+    title: finalTitle,
+    rank: (randomEvent.rank as 'C' | 'B' | 'A' | 'S') || 'C'
   };
 };
 

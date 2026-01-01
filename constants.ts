@@ -15,7 +15,7 @@ export const LOCATIONS = {
   ]
 };
 
-// 映射到本地 assets 文件夹
+// Mapping locations to provided background images
 export const LOCATION_ASSETS = [
     "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSn1pVqs-ycjTblYGYp-hoQaVcDusGQACBDoAArdzuVbf1rRqes-7dTgE.png", // 翠绿低语森林
     "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSnxpVqs8ICiLlN8dfPueQeo2-pzx5AACAzoAArdzuVaRByOGq3qv7jgE.png", // 干涸纸艺沙丘
@@ -24,7 +24,7 @@ export const LOCATION_ASSETS = [
     "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSntpVqs4MQ1DdUMjN-JMVTEFqc9Z0AACAjoAArdzuVZ4DDTmv-_WPjgE.png"    // 宿愿领域 (复用雪山)
 ];
 
-// 映射到本地 assets 文件夹
+// Mapping characters to provided sprites
 export const CHARACTER_ASSETS = [
     "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSnlpVqs00fkHKGwyvDV-uZ9lg5aodgADOgACt3O5ViuTMx-4lvLVOAQ.png",    // 精灵 (对应森林)
     "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSnhpVqswYPtVbSfn2Z8HT_Be-ntKpgAC_zkAArdzuVaE30QPKOwsvDgE.png", // 骑士 (对应沙漠/边境)
@@ -126,14 +126,24 @@ export const TRANSLATIONS = {
 };
 
 export const SNAFU_EVENTS = [
-  { text: "i have perceived a blob of slime.", material: "gooey substance unit", quantity: 1, title: {en: "Slime Sighting", zh: "史莱姆目击记录"} },
-  { text: "a goblin creature did an attack maneuver.", material: "pointy stick", quantity: 1, title: {en: "Ambush!", zh: "突发遭遇战！"} },
-  { text: "i walked forward for a significant duration.", material: "foot soreness", quantity: 0, title: {en: "Lonely Trek", zh: "漫长的苦旅"} },
-  { text: "behold, a chest containing items.", material: "shiny metal disk", quantity: 5, title: {en: "Hidden Treasure", zh: "意外的宝藏"} },
-  { text: "the sun is emitting photons today.", material: "warmth", quantity: 0, title: {en: "Sunlit Morning", zh: "沐浴在晨光中"} },
-  { text: "defeated a low resolution enemy.", material: "pixels", quantity: 3, title: {en: "Victory", zh: "微小的胜利"} },
-  { text: "consumed a food item for sustenance.", material: "crumb", quantity: 1, title: {en: "Quick Snack", zh: "路边的小食"} },
-  { text: "engaged in dialogue with npc.", material: "quest log update", quantity: 1, title: {en: "Local Rumors", zh: "乡间的传闻"} },
+  // C Rank - Common/Trivial
+  { text: "found a peculiarly shaped rock. it looks nice.", material: "pretty stone", quantity: 1, title: {en: "Nice Rock", zh: "好看的石头"}, rank: 'C' },
+  { text: "i walked forward for a significant duration.", material: "foot soreness", quantity: 0, title: {en: "Lonely Trek", zh: "漫长的苦旅"}, rank: 'C' },
+  { text: "the sun is emitting photons today.", material: "warmth", quantity: 0, title: {en: "Sunlit Morning", zh: "沐浴在晨光中"}, rank: 'C' },
+  { text: "engaged in dialogue with npc.", material: "quest log update", quantity: 1, title: {en: "Local Rumors", zh: "乡间的传闻"}, rank: 'C' },
+
+  // B Rank - Uncommon/Good
+  { text: "consumed a very delicious ration.", material: "crumb", quantity: 1, title: {en: "Tasty Meal", zh: "美味的一餐"}, rank: 'B' },
+  { text: "behold, a chest containing items.", material: "shiny metal disk", quantity: 5, title: {en: "Hidden Treasure", zh: "意外的宝藏"}, rank: 'B' },
+  { text: "found a patch of rare herbs.", material: "herb leaf", quantity: 2, title: {en: "Herbalist Find", zh: "稀有草药"}, rank: 'B' },
+
+  // A Rank - Rare/Excellent
+  { text: "engaged in combat with a formidable foe and won.", material: "loot", quantity: 3, title: {en: "Epic Victory", zh: "强敌击破"}, rank: 'A' },
+  { text: "discovered an ancient ruin entrance.", material: "ancient brick", quantity: 3, title: {en: "Discovery", zh: "遗迹发现"}, rank: 'A' },
+
+  // S Rank - Legendary/Critical (The specific request)
+  { text: "a goblin ambush resulted in damage to my equipment. my skirt is torn.", material: "cloth scrap", quantity: 1, title: {en: "Wardrobe Malfunction", zh: "不妙的意外"}, rank: 'S' },
+  { text: "witnessed a divine beast passing by.", material: "glowing scale", quantity: 5, title: {en: "Divine Encounter", zh: "神兽降临"}, rank: 'S' }
 ];
 
 export const SNAFU_COMMENTS = [

@@ -26,30 +26,35 @@
           --border-width: 3px;
           --font-title: 'Fredoka', cursive;
           --font-body: 'Varela Round', sans-serif;
+          
+          /* Special: Dark text for white bubbles */
+          --text-on-white: #3a5a40; 
       }
 
       /* Dark Theme (Deep Woods) */
       [data-theme="dark"] {
           --bg-color: #1a2e1a;
           --container-bg: #2d4a2d;
-          --card-bg: #3a5a40;
-          --text-main: #dad7cd;
+          --card-bg: #2f4f38;
+          --text-main: #f0fdf4;
           --text-title: #ffffff;
           --accent-color: #588157;
           --accent-pop: #f39c12;
-          --border-color: #a3b18a;
+          --border-color: #8fbc8f;
+          --text-on-white: #1a2e1a; /* Use dark bg color as text on white */
       }
 
       /* Deep Green Theme */
       [data-theme="deep-green"] {
-          --bg-color: #081c15;
+          --bg-color: #0d1f18;
           --container-bg: #1b4332;
           --card-bg: #2d6a4f;
           --text-main: #d8f3dc;
           --text-title: #ffffff;
           --accent-color: #52b788;
-          --accent-pop: #b7e4c7;
+          --accent-pop: #198c56; 
           --border-color: #74c69d;
+          --text-on-white: #0d1f18;
       }
 
       /* Pink Theme (Sakura) */
@@ -62,6 +67,7 @@
           --accent-color: #ff8fa3;
           --accent-pop: #ff4d6d;
           --border-color: #a4133c;
+          --text-on-white: #590d22;
       }
 
       /* Blue Theme (Ocean) */
@@ -74,6 +80,7 @@
           --accent-color: #7dd3fc;
           --accent-pop: #0284c7;
           --border-color: #075985;
+          --text-on-white: #0c4a6e;
       }
 
       /* Mono Transparent Theme */
@@ -86,6 +93,7 @@
           --accent-color: #999999;
           --accent-pop: #444444;
           --border-color: #111111;
+          --text-on-white: #000000;
       }
 
       * {
@@ -103,6 +111,11 @@
           background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
           background-size: 40px 40px;
           overflow-x: hidden;
+      }
+
+      /* Force form elements to use theme text color */
+      input, textarea, select, button {
+          color: var(--text-main);
       }
 
       .font-title { font-family: var(--font-title); }
@@ -189,6 +202,14 @@
       .nav-btn:hover::before, .nav-btn.active::before {
           border-color: var(--border-color);
           background: var(--accent-color);
+          box-shadow: 4px 4px 0px rgba(0,0,0,0.15);
+      }
+
+      /* Disable Animation Class (Static Squiggle) */
+      body.no-wobble .wobbly-box::before,
+      body.no-wobble .nav-btn::before {
+          animation: none !important;
+          filter: url('#squiggly-1'); /* Apply static distortion to maintain style */
       }
 
       ::-webkit-scrollbar { width: 12px; }
@@ -208,7 +229,6 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
 </head>
   <body>
     <svg style="display: none;">
@@ -236,6 +256,5 @@
         </defs>
     </svg>
     <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
-</body>
+  </body>
 </html>

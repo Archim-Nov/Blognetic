@@ -10,7 +10,9 @@ export const BlogHeader: React.FC<{
   setLang: (lang: 'en' | 'zh') => void;
   theme: ThemeType;
   setTheme: (t: ThemeType) => void;
-}> = ({ activeTab, onTabChange, lang, setLang, theme, setTheme }) => {
+  enableWobble: boolean;
+  setEnableWobble: (enabled: boolean) => void;
+}> = ({ activeTab, onTabChange, lang, setLang, theme, setTheme, enableWobble, setEnableWobble }) => {
   const t = TRANSLATIONS[lang];
   const [langOpen, setLangOpen] = useState(false);
   const [themeOpen, setThemeOpen] = useState(false);
@@ -62,6 +64,20 @@ export const BlogHeader: React.FC<{
       <div className="flex items-center gap-3">
         <div className="relative" onClick={(e) => e.stopPropagation()}>
             <button 
+                onClick={() => setEnableWobble(!enableWobble)}
+                className={`
+                    w-10 h-10 rounded-full border-2 border-[var(--border-color)] 
+                    flex items-center justify-center transition-all cursor-pointer wobbly-box shadow-sm
+                    ${enableWobble ? 'bg-[var(--bg-color)] text-[var(--text-title)] hover:bg-[var(--accent-color)]/20' : 'bg-[var(--accent-color)] text-white hover:bg-[var(--accent-pop)]'}
+                `}
+                title={enableWobble ? (lang === 'zh' ? "停止抖动" : "Stop Wobble") : (lang === 'zh' ? "开启抖动" : "Start Wobble")}
+            >
+                <i className={`fas ${enableWobble ? 'fa-pause' : 'fa-play'}`}></i>
+            </button>
+        </div>
+
+        <div className="relative" onClick={(e) => e.stopPropagation()}>
+            <button 
                 onClick={() => { setLangOpen(!langOpen); setThemeOpen(false); }}
                 className="flex items-center gap-2 px-4 py-2 rounded-full border-2 border-[var(--border-color)] bg-[var(--bg-color)] text-[var(--text-title)] font-bold wobbly-box hover:bg-[var(--accent-color)]/20 transition-all cursor-pointer"
             >
@@ -71,7 +87,7 @@ export const BlogHeader: React.FC<{
             </button>
             
             {langOpen && (
-                <div className="absolute top-full right-0 mt-3 w-32 bg-white rounded-[var(--radius-md)] border-2 border-[var(--border-color)] overflow-hidden z-[100] wobbly-box shadow-xl animate-in fade-in slide-in-from-top-2 duration-200">
+                <div className="absolute top-full right-0 mt-3 w-32 bg-card-context rounded-[var(--radius-md)] border-2 border-[var(--border-color)] overflow-hidden z-[100] wobbly-box shadow-xl animate-in fade-in slide-in-from-top-2 duration-200">
                     <button onClick={() => { setLang('en'); setLangOpen(false); }} className={`w-full text-left px-4 py-2 hover:bg-[var(--accent-color)]/10 font-bold transition-colors cursor-pointer ${lang === 'en' ? 'text-[var(--accent-pop)]' : 'text-[var(--text-main)]'}`}>English</button>
                     <button onClick={() => { setLang('zh'); setLangOpen(false); }} className={`w-full text-left px-4 py-2 hover:bg-[var(--accent-color)]/10 font-bold transition-colors border-t border-[var(--border-color)]/10 cursor-pointer ${lang === 'zh' ? 'text-[var(--accent-pop)]' : 'text-[var(--text-main)]'}`}>中文</button>
                 </div>
@@ -89,7 +105,7 @@ export const BlogHeader: React.FC<{
             </button>
 
             {themeOpen && (
-                <div className="absolute top-full right-0 mt-3 w-48 bg-white rounded-[var(--radius-md)] border-2 border-[var(--border-color)] overflow-hidden z-[100] wobbly-box shadow-xl animate-in fade-in slide-in-from-top-2 duration-200">
+                <div className="absolute top-full right-0 mt-3 w-48 bg-card-context rounded-[var(--radius-md)] border-2 border-[var(--border-color)] overflow-hidden z-[100] wobbly-box shadow-xl animate-in fade-in slide-in-from-top-2 duration-200">
                     {themes.map((th) => (
                         <button 
                             key={th.id}
@@ -157,8 +173,8 @@ export const BlogHero: React.FC<{
                   
                   {/* Localized Thought Bubble */}
                   {thought && (
-                    <div className="absolute -top-24 -right-16 md:-right-24 min-w-[120px] max-w-[180px] p-3 px-4 bg-white rounded-2xl border-2 border-[var(--border-color)] animate-bounce shadow-lg wobbly-box z-30">
-                        <p className="text-xs md:text-sm font-bold text-[var(--text-main)] text-center leading-tight">
+                    <div className="absolute -top-24 -right-16 md:-right-24 min-w-[120px] max-w-[180px] p-3 px-4 bg-white rounded-2xl wobbly-box animate-bounce z-30">
+                        <p className="text-xs md:text-sm font-bold text-[var(--text-on-white)] text-center leading-tight">
                             {thought}
                         </p>
                         {/* Little tail for bubble */}
@@ -173,7 +189,7 @@ export const BlogHero: React.FC<{
               
               <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-6 text-white drop-shadow-md">
                  <div className="flex-1 w-full text-center md:text-left">
-                     <div className="inline-block bg-[var(--accent-pop)] text-white px-3 py-1 rounded-full text-xs font-title mb-2 wobbly-box border border-white uppercase">
+                     <div className="inline-block bg-[var(--accent-pop)] text-white px-4 py-1.5 rounded-full text-xs font-title mb-2 wobbly-box uppercase shadow-sm tracking-wider">
                          {t.exploring}
                      </div>
                      <h2 className="font-title text-3xl md:text-4xl leading-tight mb-2">{currentLocation}</h2>
@@ -183,7 +199,7 @@ export const BlogHero: React.FC<{
                      </div>
                  </div>
                  
-                 <div className="flex items-center gap-6 md:gap-8 bg-white/10 backdrop-blur-md p-3 px-6 rounded-2xl border border-white/20 wobbly-box">
+                 <div className="flex items-center gap-6 md:gap-8 bg-white/10 backdrop-blur-md p-3 px-6 rounded-2xl wobbly-box">
                      <div className="flex flex-col items-center">
                          <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-white/70">
                              <i className="fas fa-bolt-lightning text-yellow-400"></i>
@@ -220,6 +236,17 @@ export const BlogHero: React.FC<{
   );
 };
 
+// --- Helper for Ranks ---
+export const getRankStyles = (r?: string) => {
+    switch (r) {
+        case 'S': return 'bg-gradient-to-br from-yellow-300 to-orange-500 text-white border-yellow-600';
+        case 'A': return 'bg-red-500 text-white border-red-700';
+        case 'B': return 'bg-blue-400 text-white border-blue-600';
+        case 'C': return 'bg-gray-400 text-white border-gray-600';
+        default: return 'bg-gray-400 text-white border-gray-600';
+    }
+  };
+
 // --- Post Card ---
 export const BlogCard: React.FC<{
   title: string;
@@ -228,19 +255,35 @@ export const BlogCard: React.FC<{
   tags: string[];
   author: string;
   timestamp: string;
-}> = ({ title, content, image, tags, author, timestamp }) => {
+  rank?: 'C' | 'B' | 'A' | 'S';
+  onClick?: () => void;
+}> = ({ title, content, image, tags, author, timestamp, rank, onClick }) => {
+
   return (
-    <article className="wobbly-box bg-card-context p-5 rounded-[var(--radius-md)] flex flex-col hover:-translate-y-2 transition-all h-full group">
-      <div className="relative h-52 mb-5 rounded-[12px] wobbly-box overflow-hidden z-10">
-         {tags.length > 0 && (
-             <span className="absolute top-2 right-2 bg-[var(--accent-color)] text-white text-[10px] px-3 py-1 rounded-full font-title font-bold border-2 border-[var(--border-color)] z-20 wobbly-box">
-                {tags[0]}
-             </span>
-         )}
-         <img 
-            src={image || "https://images.unsplash.com/photo-1505935428862-770b6f24f629?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"} 
-            className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
-         />
+    <article 
+        onClick={onClick}
+        className="wobbly-box bg-card-context p-5 rounded-[var(--radius-md)] flex flex-col hover:-translate-y-2 transition-all h-full group cursor-pointer"
+    >
+      {/* Split into wobbly container and overflow container to prevent clipping of the wobble */}
+      <div className="relative h-52 mb-5 wobbly-box z-10 rounded-[12px]">
+         <div className="w-full h-full overflow-hidden rounded-[inherit]">
+             {tags.length > 0 && (
+                 <span className="absolute top-2 right-2 bg-[var(--accent-color)] text-white text-[10px] px-3 py-1 rounded-full font-title font-bold z-20 wobbly-box shadow-sm">
+                    {tags[0]}
+                 </span>
+             )}
+             
+             {rank && (
+                <div className={`absolute top-2 left-2 w-10 h-10 flex items-center justify-center rounded-full font-title font-bold text-xl border-2 shadow-lg z-20 wobbly-box ${getRankStyles(rank)}`}>
+                    {rank}
+                </div>
+             )}
+
+             <img 
+                src={image || "https://images.unsplash.com/photo-1505935428862-770b6f24f629?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"} 
+                className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+             />
+         </div>
       </div>
       
       <div className="flex flex-col flex-1">
@@ -269,19 +312,22 @@ export const StreamModal: React.FC<{
   children: React.ReactNode;
 }> = ({ onClose, title, children }) => {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[var(--bg-color)]/70 backdrop-blur-md p-4">
-        <div className="wobbly-box bg-card-context w-full max-w-5xl h-[88vh] rounded-[var(--radius-lg)] flex flex-col overflow-hidden animate-in zoom-in duration-300">
-            <div className="flex justify-between items-center p-5 border-b-2 border-[var(--border-color)] bg-[var(--accent-color)]/10">
-                <div className="flex items-center gap-3 font-title text-2xl text-[var(--text-title)]">
-                    <div className="w-4 h-4 rounded-full bg-orange-500 border-2 border-[var(--border-color)] animate-pulse shadow-[0_0_10px_orange]"></div>
-                    <span>{title}</span>
+    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-[var(--bg-color)]/70 backdrop-blur-md p-4">
+        {/* Separated wobbly container from overflow container to prevent border clipping */}
+        <div className="wobbly-box bg-card-context w-full max-w-5xl h-[88vh] rounded-[var(--radius-lg)] animate-in zoom-in duration-300 relative flex flex-col">
+            <div className="flex-1 flex flex-col overflow-hidden rounded-[var(--radius-lg)] relative z-10">
+                <div className="flex justify-between items-center p-5 border-b-2 border-[var(--border-color)] bg-[var(--accent-color)]/10 select-none">
+                    <div className="flex items-center gap-3 font-title text-2xl text-[var(--text-title)]">
+                        {/* Dot removed here */}
+                        <span>{title}</span>
+                    </div>
+                    <button onClick={onClose} className="w-10 h-10 rounded-full bg-card-context hover:bg-red-500 hover:text-white transition-all flex items-center justify-center text-xl border-2 border-[var(--border-color)] wobbly-box text-[var(--text-main)] cursor-pointer">
+                        <i className="fas fa-times"></i>
+                    </button>
                 </div>
-                <button onClick={onClose} className="w-10 h-10 rounded-full bg-white/20 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center text-xl border-2 border-[var(--border-color)] wobbly-box">
-                    <i className="fas fa-times"></i>
-                </button>
-            </div>
-            <div className="flex-1 overflow-hidden relative">
-                {children}
+                <div className="flex-1 overflow-hidden relative flex flex-col bg-card-context/50">
+                    {children}
+                </div>
             </div>
         </div>
     </div>

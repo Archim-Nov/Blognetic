@@ -9,6 +9,7 @@ export interface Tweet {
   retweets: number;
   timestamp: string;
   type: 'event' | 'flavor' | 'user';
+  rank?: 'C' | 'B' | 'A' | 'S';
 }
 
 export interface StreamComment {

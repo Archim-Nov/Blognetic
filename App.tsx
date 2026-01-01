@@ -52,6 +52,7 @@ function App() {
   const [lang, setLang] = useState<'en' | 'zh'>('en');
   const [theme, setTheme] = useState<ThemeType>('light');
   const [currentThought, setCurrentThought] = useState("");
+  const [enableWobble, setEnableWobble] = useState(true);
 
   const [gameState, setGameState] = useState<GameState>({
     materials: 0,
@@ -74,6 +75,14 @@ function App() {
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    if (enableWobble) {
+        document.body.classList.remove('no-wobble');
+    } else {
+        document.body.classList.add('no-wobble');
+    }
+  }, [enableWobble]);
 
   // Initial thought
   useEffect(() => {
@@ -172,7 +181,8 @@ function App() {
       likes: Math.floor(Math.random() * 5),
       retweets: 0,
       timestamp: formatGameTime(nextTotalHours, lang), 
-      type: 'event'
+      type: 'event',
+      rank: eventData.rank
     };
 
     setTweets(prev => [newTweet, ...prev].slice(0, 50)); 
@@ -247,6 +257,8 @@ function App() {
             setLang={setLang}
             theme={theme}
             setTheme={setTheme}
+            enableWobble={enableWobble}
+            setEnableWobble={setEnableWobble}
         />
 
         <BlogHero 
@@ -284,7 +296,7 @@ function App() {
         <ExplorationFeed tweets={tweets} lang={lang} />
         
         <footer className="wobbly-box bg-card-context p-6 mt-16 rounded-[var(--radius-md)] text-center font-title text-[var(--text-main)]">
-            <p>Made with <i className="fas fa-heart text-[var(--accent-pop)]"></i> and Nature | © 2024 ForestBlog</p>
+            <p>Made with ❤ and Nature | © 2026 Blognetic</p>
         </footer>
 
         {gameState.isStreaming && (

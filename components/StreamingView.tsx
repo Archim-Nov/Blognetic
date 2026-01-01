@@ -64,7 +64,7 @@ export const StreamingWindow: React.FC<{
             </div>
 
             {/* Controls Bar */}
-            <div className="bg-white p-5 flex items-center justify-between border-t-4 border-[var(--border-color)]">
+            <div className="bg-card-context p-5 flex items-center justify-between border-t-4 border-[var(--border-color)]">
                  <div className="flex items-center gap-5">
                     <div className="w-16 h-16 rounded-2xl bg-[var(--bg-color)] border-[3px] border-[var(--border-color)] flex items-center justify-center text-4xl wobbly-box">
                         🦊
@@ -88,14 +88,14 @@ export const StreamingWindow: React.FC<{
 
         {/* Chat Panel */}
         <div className="w-96 flex flex-col bg-[var(--container-bg)]/30 backdrop-blur-sm">
-            <div className="p-5 border-b-4 border-[var(--border-color)] font-title text-center text-[var(--text-title)] text-xl bg-white shadow-sm">
+            <div className="p-5 border-b-4 border-[var(--border-color)] font-title text-center text-[var(--text-title)] text-xl bg-card-context shadow-sm">
                 <i className="fas fa-comments mr-2 text-[var(--accent-color)]"></i>
                 {t.streamChat}
             </div>
             
             <div className="flex-1 overflow-y-auto p-5 space-y-4" ref={chatRef}>
                 {comments.map(c => (
-                    <div key={c.id} className={`p-4 rounded-[15px] border-2 border-[var(--border-color)]/20 shadow-sm wobbly-box bg-white/80 ${c.isDonation ? 'bg-orange-50 border-orange-200' : ''}`}>
+                    <div key={c.id} className={`p-4 rounded-[15px] border-2 border-[var(--border-color)]/20 shadow-sm wobbly-box bg-card-context/80 ${c.isDonation ? 'bg-orange-50/10 border-orange-200' : ''}`}>
                         <div className="flex items-center gap-2 mb-1">
                             <span className="font-bold text-[var(--text-title)] font-title">{c.user}</span>
                             {c.isDonation && <span className="text-[10px] bg-orange-500 text-white px-2 py-0.5 rounded-full font-bold uppercase">{t.donated}</span>}
@@ -110,12 +110,12 @@ export const StreamingWindow: React.FC<{
                 ))}
             </div>
 
-            <div className="p-5 border-t-4 border-[var(--border-color)] bg-white">
+            <div className="p-5 border-t-4 border-[var(--border-color)] bg-card-context">
                 <div className="relative wobbly-box rounded-full border-[3px] border-[var(--border-color)] overflow-hidden">
                     <input 
                         type="text" 
                         placeholder={t.saySomething} 
-                        className="w-full bg-[var(--bg-color)] px-6 py-3 text-[var(--text-main)] outline-none text-lg font-body pr-12"
+                        className="w-full bg-[var(--bg-color)] px-6 py-3 text-[var(--text-main)] outline-none text-lg font-body pr-12 placeholder:text-[var(--text-main)]/50"
                     />
                     <button className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--accent-color)] hover:text-[var(--accent-pop)] transition-colors">
                         <i className="fas fa-paper-plane"></i>
