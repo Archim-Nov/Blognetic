@@ -15,21 +15,20 @@ export const LOCATIONS = {
   ]
 };
 
-// 映射到本地 assets 文件夹 (请确保 assets 文件夹位于 public 目录下)
-// 例如: project_root/public/assets/backgrounds/bg_forest.png
+// Mapping locations to provided background images
 export const LOCATION_ASSETS = [
-    "/assets/backgrounds/bg_forest.png", // 翠绿低语森林
-    "/assets/backgrounds/bg_desert.png", // 干涸纸艺沙丘
-    "/assets/backgrounds/bg_snow.png",   // 纸板冰冻巅峰
-    "/assets/backgrounds/bg_forest.png", // 边境前哨 (复用森林)
-    "/assets/backgrounds/bg_snow.png"    // 宿愿领域 (复用雪山)
+    "https://i0.hdslb.com/bfs/new_dyn/3d312e4ca0df2646fcdba477595be01f358806.png", // Lush Forest
+    "https://i0.hdslb.com/bfs/new_dyn/8360e9b63c616deac5ec46a27aaff59c358806.png", // Desert/Hills
+    "https://i0.hdslb.com/bfs/new_dyn/18657fd74093571f6c9d54457612cfb6358806.png", // Snowy Mountains
+    "https://i0.hdslb.com/bfs/new_dyn/3d312e4ca0df2646fcdba477595be01f358806.png", // Reusing Lush Forest
+    "https://i0.hdslb.com/bfs/new_dyn/18657fd74093571f6c9d54457612cfb6358806.png"  // Reusing Snowy Mountains
 ];
 
-// 映射到本地 assets 文件夹 (请确保 assets 文件夹位于 public 目录下)
+// Mapping characters to provided sprites
 export const CHARACTER_ASSETS = [
-    "/assets/sprites/sprite_elf.png",    // 精灵 (对应森林)
-    "/assets/sprites/sprite_knight.png", // 骑士 (对应沙漠/边境)
-    "/assets/sprites/sprite_succubus.png" // 魅魔 (对应领域)
+    "https://i0.hdslb.com/bfs/new_dyn/be3bd275fbea30c99851e82fdc0b2c69358806.png", // Elf
+    "https://i0.hdslb.com/bfs/new_dyn/64b3dea4aaac0c4f653825b41f400ce6358806.png", // Knight
+    "https://i0.hdslb.com/bfs/new_dyn/7af2b327dac9b4bbde6e3d98e08f26f1358806.png", // Succubus
 ];
 
 export const TES_MONTHS = {
