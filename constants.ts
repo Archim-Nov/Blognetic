@@ -17,18 +17,18 @@ export const LOCATIONS = {
 
 // 映射到本地 assets 文件夹
 export const LOCATION_ASSETS = [
-    "./assets/backgrounds/bg_forest.png", // 翠绿低语森林
-    "./assets/backgrounds/bg_desert.png", // 干涸纸艺沙丘
-    "./assets/backgrounds/bg_snow.png",   // 纸板冰冻巅峰
-    "./assets/backgrounds/bg_forest.png", // 边境前哨 (复用森林)
-    "./assets/backgrounds/bg_snow.png"    // 宿愿领域 (复用雪山)
+    "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSn1pVqs-ycjTblYGYp-hoQaVcDusGQACBDoAArdzuVbf1rRqes-7dTgE.png", // 翠绿低语森林
+    "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSnxpVqs8ICiLlN8dfPueQeo2-pzx5AACAzoAArdzuVaRByOGq3qv7jgE.png", // 干涸纸艺沙丘
+    "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSntpVqs4MQ1DdUMjN-JMVTEFqc9Z0AACAjoAArdzuVZ4DDTmv-_WPjgE.png",   // 纸板冰冻巅峰
+    "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSn1pVqs-ycjTblYGYp-hoQaVcDusGQACBDoAArdzuVbf1rRqes-7dTgE.png", // 边境前哨 (复用森林)
+    "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSntpVqs4MQ1DdUMjN-JMVTEFqc9Z0AACAjoAArdzuVZ4DDTmv-_WPjgE.png"    // 宿愿领域 (复用雪山)
 ];
 
 // 映射到本地 assets 文件夹
 export const CHARACTER_ASSETS = [
-    "./assets/sprites/sprite_elf.png",    // 精灵 (对应森林)
-    "./assets/sprites/sprite_knight.png", // 骑士 (对应沙漠/边境)
-    "./assets/sprites/sprite_succubus.png" // 魅魔 (对应领域)
+    "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSnlpVqs00fkHKGwyvDV-uZ9lg5aodgADOgACt3O5ViuTMx-4lvLVOAQ.png",    // 精灵 (对应森林)
+    "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSnhpVqswYPtVbSfn2Z8HT_Be-ntKpgAC_zkAArdzuVaE30QPKOwsvDgE.png", // 骑士 (对应沙漠/边境)
+    "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSnppVqs3l3tHPuNZzAv3gVkzBjSXYgACAToAArdzuVZ5_A_s-uRZaTgE.png" // 魅魔 (对应领域)
 ];
 
 export const TES_MONTHS = {
