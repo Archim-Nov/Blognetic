@@ -57,7 +57,7 @@ function App() {
     materials: 0,
     followers: 12,
     money: 0,
-    location: LOCATIONS[0],
+    location: LOCATIONS.en[0],
     locationIndex: 0,
     timeInLocation: 0,
     isStreaming: false,
@@ -112,19 +112,25 @@ function App() {
   const handleExplorationEvent = useCallback(async () => {
     setIsProcessingEvent(true);
     
+    // Use local variables to hold derived data
+    let nextTotalHours: number = 0;
+    let nextLocationIndex: number = 0;
+
     setGameState(prev => {
         const newTotalHours = prev.totalHours + HOURS_PER_MOVE;
+        nextTotalHours = newTotalHours;
         let newTimeInLocation = prev.timeInLocation + HOURS_PER_MOVE;
         let newLocationIndex = prev.locationIndex;
         let locationChanged = false;
 
         if (newTimeInLocation >= HOURS_TO_CHANGE_MAP) {
-            newLocationIndex = (prev.locationIndex + 1) % LOCATIONS.length;
+            newLocationIndex = (prev.locationIndex + 1) % LOCATIONS.en.length;
             newTimeInLocation = 0;
             locationChanged = true;
         }
+        nextLocationIndex = newLocationIndex;
         
-        const currentLocationName = LOCATIONS[newLocationIndex];
+        const currentLocationName = LOCATIONS.en[newLocationIndex];
         let newWeather = prev.weather;
         if (Math.random() > 0.5 || locationChanged) {
             newWeather = WEATHER_CONDITIONS[Math.floor(Math.random() * WEATHER_CONDITIONS.length)];
@@ -140,8 +146,9 @@ function App() {
         };
     });
 
-    const currentLoc = gameState.location;
-    const eventData = await generateAdventureEvent(currentLoc);
+    // Pass the english location for event generation (consistent key)
+    const currentLocEn = LOCATIONS.en[nextLocationIndex];
+    const eventData = await generateAdventureEvent(currentLocEn);
     
     setGameState(prev => ({
         ...prev,
@@ -160,17 +167,17 @@ function App() {
         ? (lang === 'zh' ? `新的征途` : `A New Journey`) 
         : eventData.title[lang],
       content: (gameState.timeInLocation + HOURS_PER_MOVE >= HOURS_TO_CHANGE_MAP)
-        ? (lang === 'zh' ? `已踏入这片名为 ${LOCATIONS[(gameState.locationIndex + 1) % LOCATIONS.length]} 的领地。` : `Stepped into the domain of ${LOCATIONS[(gameState.locationIndex + 1) % LOCATIONS.length]}.`) 
+        ? (lang === 'zh' ? `已踏入这片名为 ${LOCATIONS.zh[nextLocationIndex]} 的领地。` : `Stepped into the domain of ${LOCATIONS.en[nextLocationIndex]}.`) 
         : eventData.text,
       likes: Math.floor(Math.random() * 5),
       retweets: 0,
-      timestamp: formatGameTime(gameState.totalHours + HOURS_PER_MOVE, lang), 
+      timestamp: formatGameTime(nextTotalHours, lang), 
       type: 'event'
     };
 
     setTweets(prev => [newTweet, ...prev].slice(0, 50)); 
     setIsProcessingEvent(false);
-  }, [gameState.locationIndex, gameState.timeInLocation, gameState.totalHours, gameState.weather, lang, gameState.location]);
+  }, [gameState.locationIndex, gameState.timeInLocation, gameState.totalHours, gameState.weather, lang]);
 
   const handleUserPost = (text: string, image?: string) => {
     const newTweet: Tweet = {
@@ -243,7 +250,7 @@ function App() {
         />
 
         <BlogHero 
-            currentLocation={gameState.location}
+            currentLocation={LOCATIONS[lang][gameState.locationIndex]}
             locationIndex={gameState.locationIndex}
             progress={explorationProgress} 
             energy={gameState.energy}

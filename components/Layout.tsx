@@ -173,8 +173,8 @@ export const BlogHero: React.FC<{
               
               <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-6 text-white drop-shadow-md">
                  <div className="flex-1 w-full text-center md:text-left">
-                     <div className="inline-block bg-[var(--accent-pop)] text-white px-3 py-1 rounded-full text-xs font-title mb-2 wobbly-box border border-white">
-                         NOW EXPLORING
+                     <div className="inline-block bg-[var(--accent-pop)] text-white px-3 py-1 rounded-full text-xs font-title mb-2 wobbly-box border border-white uppercase">
+                         {t.exploring}
                      </div>
                      <h2 className="font-title text-3xl md:text-4xl leading-tight mb-2">{currentLocation}</h2>
                      <div className="flex gap-4 font-bold text-sm opacity-90 justify-center md:justify-start">

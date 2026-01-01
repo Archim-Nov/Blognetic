@@ -1,10 +1,19 @@
-export const LOCATIONS = [
-  "Emerald Whispering Woods",
-  "Arid Papercraft Dunes",
-  "Frozen Peaks of Cardboard",
-  "Tamriel Border Outpost",
-  "Abyssal Sukuyan Realm"
-];
+export const LOCATIONS = {
+  en: [
+    "Emerald Whispering Woods",
+    "Arid Papercraft Dunes",
+    "Frozen Peaks of Cardboard",
+    "Tamriel Border Outpost",
+    "Abyssal Sukuyan Realm"
+  ],
+  zh: [
+    "翠绿低语森林",
+    "干涸纸艺沙丘",
+    "纸板冰冻巅峰",
+    "泰姆瑞尔边境前哨",
+    "深渊宿愿领域"
+  ]
+};
 
 // Mapping locations to provided background images
 export const LOCATION_ASSETS = [
@@ -86,7 +95,8 @@ export const TRANSLATIONS = {
     gameTitle: "Blognetic",
     era: "4E",
     cycle: "Day",
-    weather: "Weather"
+    weather: "Weather",
+    exploring: "NOW EXPLORING"
   },
   zh: {
     home: "首页", travel: "旅行", guide: "指南", food: "美食",
@@ -101,7 +111,7 @@ export const TRANSLATIONS = {
     endStream: "结束直播",
     startStream: "开始直播",
     viewers: "观众",
-    donated: "捐赠",
+    donated: "打赏",
     system: "系统",
     broadcastStarted: "直播已开始...",
     transmitting: "信号传输中...",
@@ -110,7 +120,8 @@ export const TRANSLATIONS = {
     gameTitle: "异界博主",
     era: "第四纪元",
     cycle: "日",
-    weather: "天气"
+    weather: "天气",
+    exploring: "正在探索"
   }
 };
 
