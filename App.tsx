@@ -3,7 +3,7 @@ import { BlogHeader, BlogHero, StreamModal } from './components/Layout';
 import { ExplorationFeed, ExplorationInput } from './components/ExplorationView';
 import { StreamingWindow } from './components/StreamingView';
 import { GameState, Tweet, StreamComment } from './types';
-import { LOCATIONS, WEATHER_CONDITIONS, TRANSLATIONS, TES_MONTHS, TES_DAYS } from './constants';
+import { LOCATIONS, WEATHER_CONDITIONS, TRANSLATIONS, TES_MONTHS, TES_DAYS, EXPLORATION_THOUGHTS } from './constants';
 import { generateAdventureEvent, generateStreamComment } from './services/geminiService';
 
 const MAX_MATERIALS = 100;
@@ -51,6 +51,7 @@ function App() {
   const [activeTab, setActiveTab] = useState('Home');
   const [lang, setLang] = useState<'en' | 'zh'>('en');
   const [theme, setTheme] = useState<ThemeType>('light');
+  const [currentThought, setCurrentThought] = useState("");
 
   const [gameState, setGameState] = useState<GameState>({
     materials: 0,
@@ -73,6 +74,23 @@ function App() {
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
+
+  // Initial thought
+  useEffect(() => {
+    const thoughts = EXPLORATION_THOUGHTS[lang];
+    setCurrentThought(thoughts[Math.floor(Math.random() * thoughts.length)]);
+  }, [lang]);
+
+  // Thought cycle timer
+  useEffect(() => {
+    const interval = setInterval(() => {
+        if (!gameState.isStreaming) {
+            const thoughts = EXPLORATION_THOUGHTS[lang];
+            setCurrentThought(thoughts[Math.floor(Math.random() * thoughts.length)]);
+        }
+    }, 8000); // Change thought every 8 seconds
+    return () => clearInterval(interval);
+  }, [lang, gameState.isStreaming]);
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
@@ -112,7 +130,6 @@ function App() {
             newWeather = WEATHER_CONDITIONS[Math.floor(Math.random() * WEATHER_CONDITIONS.length)];
         }
 
-        // We wrap the async call outside or use a trick to get the data
         return {
             ...prev,
             totalHours: newTotalHours,
@@ -123,7 +140,6 @@ function App() {
         };
     });
 
-    // Actually generate the event data now
     const currentLoc = gameState.location;
     const eventData = await generateAdventureEvent(currentLoc);
     
@@ -131,6 +147,10 @@ function App() {
         ...prev,
         materials: Math.min(prev.materials + (eventData.quantity * 2), MAX_MATERIALS)
     }));
+
+    // Optionally change thought when an event happens
+    const thoughts = EXPLORATION_THOUGHTS[lang];
+    setCurrentThought(thoughts[Math.floor(Math.random() * thoughts.length)]);
 
     const newTweet: Tweet = {
       id: Date.now().toString(),
@@ -231,6 +251,7 @@ function App() {
             gameTime={formatGameTime(gameState.totalHours, lang)}
             weather={gameState.weather}
             lang={lang}
+            thought={currentThought}
         />
 
         <div className="flex items-center justify-center gap-4 my-12 text-[var(--text-title)] font-title text-2xl">

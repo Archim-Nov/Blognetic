@@ -118,7 +118,8 @@ export const BlogHero: React.FC<{
   gameTime: string;
   weather: string;
   lang: 'en' | 'zh';
-}> = ({ currentLocation, locationIndex, progress, energy, materials, gameTime, weather, lang }) => {
+  thought?: string;
+}> = ({ currentLocation, locationIndex, progress, energy, materials, gameTime, weather, lang, thought }) => {
   const t = TRANSLATIONS[lang];
   
   // Choose sprite based on location index
@@ -154,10 +155,16 @@ export const BlogHero: React.FC<{
                     className="h-[320px] drop-shadow-2xl object-contain select-none pointer-events-none"
                   />
                   
-                  {/* Bubble Hint */}
-                  <div className="absolute -top-12 -right-8 w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-[var(--border-color)] animate-bounce shadow-lg wobbly-box">
-                      <span className="text-xl">💬</span>
-                  </div>
+                  {/* Localized Thought Bubble */}
+                  {thought && (
+                    <div className="absolute -top-24 -right-16 md:-right-24 min-w-[120px] max-w-[180px] p-3 px-4 bg-white rounded-2xl border-2 border-[var(--border-color)] animate-bounce shadow-lg wobbly-box z-30">
+                        <p className="text-xs md:text-sm font-bold text-[var(--text-main)] text-center leading-tight">
+                            {thought}
+                        </p>
+                        {/* Little tail for bubble */}
+                        <div className="absolute -bottom-2 left-1/4 w-4 h-4 bg-white border-r-2 border-b-2 border-[var(--border-color)] rotate-45"></div>
+                    </div>
+                  )}
               </div>
           </div>
 

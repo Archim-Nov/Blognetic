@@ -36,6 +36,33 @@ export const WEATHER_CONDITIONS = [
   "Sunny", "Rainy", "Cloudy", "Stormy", "Foggy", "Snowy", "Windy", "Meteor Shower", "Auroras", "Acid Rain"
 ];
 
+export const EXPLORATION_THOUGHTS = {
+    en: [
+        "What's that over there?",
+        "My feet are getting tired...",
+        "Hope I find some loot soon!",
+        "This scenery is amazing.",
+        "Need more materials for my next post.",
+        "Is it lunchtime yet?",
+        "I should take a picture of this.",
+        "Keep moving forward!",
+        "Wonder what's in the next area...",
+        "I love this adventuring life!"
+    ],
+    zh: [
+        "那边那是什么？",
+        "脚开始有点酸了...",
+        "希望能快点找到宝箱！",
+        "这里的风景真不错。",
+        "得多收集点下一篇博文的素材。",
+        "到吃午饭的时间了吗？",
+        "我应该把这里拍下来。",
+        "继续前进！",
+        "不知道下一个区域有什么...",
+        "我爱死这种冒险生活了！"
+    ]
+};
+
 export const TRANSLATIONS = {
   en: {
     home: "Home", travel: "Travel", guide: "Guide", food: "Food",
