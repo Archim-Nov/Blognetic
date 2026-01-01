@@ -1,180 +1,189 @@
-异界博主
+Game Design Document: Project Blognetic — The 4th Era Chronicles
 
-(Blognetic)
+Version: v1.0
+Genre: Idle / Simulation / RPG Lite
+Core Experience: Isekai Travel x Influencer Streamer Sim x Healing Papercraft Aesthetics
 
-类型：休闲挂机 (Idle) / 模拟经营 (Simulation) / 角色养成 (RPG Lite)
-核心体验：异世界旅行 x 网红直播模拟 x 治愈系纸艺美学
+1. High Concept
 
-1. 核心概念 (High Concept)
+"Stop Slaying Dragons, Start Streaming Them!"
 
-“异世界博主通过旅行直播开启自己的冒险旅程”
+Players take on the role of a Lifestyle Vlogger living in a "paper-craft" version of the Tamriel continent. In this fairytale world interwoven with magic and paper art, there is no burden of saving the world, nor is there a need to uncover deep dark truths. Your goal is simply to pack your bags, travel the lands, and use your lens to capture the morning dew, a dragon's nap, or the bustle of an Orcish tavern. Share this healing daily life of the otherworld with the internet, and become a top-tier influencer spreading warmth and beauty.
 
-玩家扮演一位生活在“纸质化”泰姆瑞尔大陆的生活方式博主 (Lifestyle Vlogger)。在这个魔法与纸艺交织的童话世界里，没有救世的重担，也不必探究世界的真相。你的目标仅仅是背起行囊，游历四方，用镜头捕捉清晨的露珠、巨龙的午睡和兽人酒馆的喧嚣，向全网分享这份异世界的治愈日常，成为传递温暖与美好的顶流博主。
+2. Core Gameplay Loop
 
-2. 核心玩法循环 (Core Gameplay Loop)
+The game follows a classic idle economy model but is packaged through "lifestyle documentation."
 
-游戏遵循经典的挂机经济模型，但通过“美好生活记录”进行了包装。
+Leisurely Stroll (Input - Travel):
 
-惬意漫步 (Input - 旅修)：
+The character strolls leisurely across a side-scrolling map, consuming Vibe (Stamina).
 
-角色在横版地图上悠闲漫步，消耗兴致。
+Encounter small moments of happiness and collect "Lifestyle Inspiration" (Topics/Materials, e.g., Glowing Mushrooms, Ancient Recipes, Wildflowers by the road).
 
-偶遇小确幸，收集**“生活灵感”**（即话题素材，如：发光的蘑菇、古老的食谱、路边的野花）。
+Journaling (Process - Content):
 
-手账记录 (Process - 沉淀)：
+The system automatically converts the journey into an illustrated Travel Journal.
 
-系统自动将行程转化为图文并茂的旅行手账。
+Players organize collected inspirations to start a "Healing Share Session" (Live Stream).
 
-玩家整理收集到的灵感，开启**“治愈分享会”**（即直播）。
+Streaming Monetization (Output - Burst):
 
-直播变现 (Output - 爆发)：
+Consume "Lifestyle Inspirations" to gain Followers (XP/Level) and Septims (Soft Currency/Gold).
 
-消耗“生活灵感”，获得粉丝关注（等级经验）和金币打赏（软通货）。
+Trigger Commercial Breaks (Sponsorship moments) to double the revenue.
 
-触发商业化广告（恰饭时刻），获得收益翻倍。
+Progression Loop (Sink - Reinvestment):
 
-养成循环 (Sink - 回收)：
+Use Septims to upgrade the Character Skill Tree and Streaming Gear.
 
-使用金币升级角色技能树与直播设备。
+Improve exploration efficiency and monetization ability to unlock the next map region.
 
-提升探索效率与吸金能力，解锁下一张地图。
+3. World & Aesthetics
 
-3. 世界观与视觉风格 (World & Aesthetics)
+3.1 Visual Style: Pop-up Book Aesthetic
 
-3.1 视觉风格：立体书美学 (Pop-up Book Style)
+Papercraft Construction: All characters, monsters, and scenes are made of cardboard, paper cutouts, and cotton paper.
 
-纸艺构建：所有角色、怪物、场景均由硬纸板、剪纸、棉纸构成。
+Wobbly Effect: UI edges and scenery have a slight hand-drawn jitter, simulating the breathing feel of old monitors or paper trembling in the breeze.
 
-摇摆滤镜 (Wobbly Effect)：UI边缘与景物带有手绘线条的微弱抖动，模拟老式显示器或纸张在风中颤动的呼吸感。
+Parallax Scrolling: Background layers move at different speeds (foreground grass fast, distant mountains slow), creating the sensation of an endless journey.
 
-视差滚动：背景分层移动（近景草地快、远景山脉慢），营造无限行走的旅途感。
+Rhythmic Animation: Character movement uses 2-frame or 4-frame pixel/cutout step animation, combined with sound effects for a satisfying and relaxing feel.
 
-律动动画：角色行走采用两帧或四帧的像素/剪纸律动（Step Animation），配合音效，魔性且解压。
+3.2 Dynamic World: Nomadic Migration
 
-3.2 动态世界：游牧式迁徙
+8-Day Cycle: The character stays in a single Biome for only 8 in-game days (approx. X real-time hours).
 
-8日周期：角色在单一地貌（Biome）仅停留 8 个游戏日（约现实时间 X 小时）。
+Cross-Region Migration: After the cycle ends, the character is forced to move to the next biome, drastically changing the visual style.
 
-跨区域迁移：周期结束后，强制进入下一地貌，视觉风格剧变。
+Level 1: Emerald Woods - Green theme, paper cutout trees.
 
-Level 1：翡翠低语林地 (Emerald Woods) - 绿色主调，剪纸树木。
+Level 2: Papercraft Dunes - Yellow theme, corrugated cardboard dunes.
 
-Level 2：纸艺荒漠 (Papercraft Dunes) - 黄色主调，瓦楞纸沙丘。
+Level 3: Frozen Peaks - Blue/White theme, cotton snow piles.
 
-Level 3：硬纸板冰峰 (Frozen Peaks) - 蓝白主调，棉花雪堆。
+4. Character System & Deep Progression
 
-4. 角色系统与深度养成 (Character & Progression)
+4.1 Avatar Customization
 
-4.1 角色自定义 (Avatar)
+Players are no longer bound to specific followers but customize their unique "Otherworlder" avatar.
 
-玩家不再绑定特定随从，而是自定义唯一的“穿越者”形象。
+Appearance: Hairstyles, paper masks, racial traits (Human ears / Elf ears / Horns).
 
-外形：发型、纸艺面具、种族特征（人耳/精灵耳/兽角）。
+Class Selection: Determines idle income tendencies; can be switched via items.
 
-职业选择 (Class)：决定挂机收益倾向，可通过转职道具切换。
+The Charmer (Succubus/Mage): High Charisma.
 
-魅魔/法师 (The Charmer)：高魅力值。
+Trait: Higher audience interaction rate during streams; Gold Tips +15%.
 
-特性：直播时观众互动率高，金币打赏+15%。
+The Tank (Knight): High Survival.
 
-重装骑士 (The Tank)：高生存值。
+Trait: Stamina Cap +30%; lasts longer in extreme environments (e.g., Volcanoes), reducing the frequency of returning to town.
 
-特性：耐力上限+30%，能在极端环境（如火山）坚持更久，减少回城次数。
+The Looter (Ranger/Rogue): High Luck.
 
-游侠/盗贼 (The Looter)：高幸运值。
+Trait: Drop rate of Rare Materials (used for Premium Streams) +10%.
 
-特性：稀有素材（用于开启高级直播）掉落率+10%。
+4.2 Skill Tree: Economy Sink
 
-4.2 技能树：金币回收核心 (Economy Sink)
+Players spend Septims earned from streaming to unlock talents in two main branches:
 
-玩家消耗直播赚取的金币来点亮天赋树，分为两系：
+A. Stream Tech Branch - To Earn More Money
 
-A. 直播科技线 (Stream Tech) - 为了赚更多的钱
+Interdimensional Signal Booster: Increases passive follower growth speed.
 
-跨次元信号塔：增加粉丝自然增长速度。
+Glamour Filter I/II/III: Increases revenue per unit of time during streams (more gold per material consumed).
 
-滤镜魔法 I/II/III：提升直播时的单位时间收益（每消耗1个素材获得的金币增加）。
+Auto-Thanks Bot: Unlocks offline income; small amounts of tips are received even when not streaming.
 
-自动感谢姬：解锁离线收益，即使不开启直播，也会有少量粉丝打赏。
+B. Otherworld Survival Branch - To Travel Further
 
-B. 异界生存线 (Survival) - 为了走更远的路
+Reinforced Cardboard Armor: Increases Stamina Cap.
 
-加厚纸板甲：提升体力上限。
+4D Backpack: Increases the stack limit of "Lifestyle Inspirations" (solves idle overflow issues).
 
-四次元背包：增加“话题素材”的堆叠上限（解决挂机溢出问题）。
+Gourmet Radar: Increases the trigger probability of stamina recovery events.
 
-美食雷达：增加自动恢复体力的事件触发概率。
+5. Social & Streaming System
 
-5. 社交媒体与直播系统 (Social & Streaming)
+5.1 The Feed
 
-5.1 动态流 (The Feed)
+Interface: Mimics modern social apps (Instagram/Twitter), with a reverse chronological timeline.
 
-界面：模仿现代社交APP（Instagram/Twitter），时间轴倒序排列。
+Content:
 
-内容：
+Auto-Generated: "4E 201 Morning Star - Found a strange altar by the road, looks like it's made of origami."
 
-自动生成：“4E 201年 星辰月 - 在路边发现了一个奇怪的祭坛，看起来像折纸做的。”
+Player Manual Input: Players can click "Post" to input their own thoughts, which remain permanently on the timeline.
 
-玩家手动：玩家点击“发推”，输入吐槽，永久留存在时间轴上。
+5.2 Core Gameplay: Live Mode
 
-5.2 核心玩法：开启直播 (Live Mode)
+Trigger Condition: Material Library >= 20 items.
 
-触发条件：素材库 >= 20 个。
+Presentation: The screen dims, and a spotlight hits the character. Bullet comments (Danmaku) scroll rapidly on the right side.
 
-演出效果：界面变暗，聚光灯打在角色身上。屏幕右侧飞速滚动弹幕。
+Comment Library:
 
-弹幕库：
+Normal: "Is that a dragon behind the streamer?" / "Love this aesthetic."
 
-普通：“主播后面那是龙吗？” / “这个画质爱了。”
+Donation: "'Jarl of Eastmarch' donated 500 Septims!" (Accompanied by coin drop SFX).
 
-打赏：“‘东境领主’打赏了 500 金币！”（伴随金币掉落音效）。
+Settlement: Materials depleted, stream ends, settlement panel pops up (New Followers, Total Revenue).
 
-结算：素材耗尽，直播结束，弹出结算面板（新增粉丝数、总收益）。
+6. Monetization Design (IAA)
 
-6. 商业化设计 (IAA Monetization)
+All ad placements are wrapped within the world view to reduce immersion breaking and increase click-through rates.
 
-所有广告位均进行世界观包装，降低违和感，提升点击率。
+6.1 Core Ad Point: Commercial Break
 
-6.1 核心广告点：直播中场休息 (Commercial Break)
+Mechanism: Triggered halfway through a stream or when materials are running low.
 
-机制：在直播进行到一半或素材即将耗尽时触发。
+Packaging: "Fam, the streamer needs a water break. Roll the sponsor ad! Don't go away, double drops after this!"
 
-包装：“家人们，主播去喝口水，进一段赞助商广告，别走开哦！广告后双倍掉落！”
+Reward:
 
-奖励：
+Watch Video Ad (15-30s).
 
-观看视频广告（15-30秒）。
+Stream continues without interruption, and for the next 30 seconds, Gold Tip Revenue is Doubled (x2 Multiplier).
 
-直播不中断，且接下来的30秒内，金币打赏收益翻倍 (x2 Multiplier)。
+This is the highest priority click point for players seeking to maximize revenue.
 
-这是玩家为了最大化收益最愿意主动点击的点位。
+6.2 Auxiliary Ad Points:
 
-6.2 辅助广告点：
+Sponsor Crate (Airdrop):
 
-赞助商空投 (Sponsor Crate)：
+Scene: A box with a balloon floats across the sky during idle exploration.
 
-场景：挂机时天空飘过挂着气球的箱子。
+Reward: Watch ad to instantly refill "Lifestyle Inspirations," allowing an immediate start to the next stream.
 
-奖励：看广告，直接补满“话题素材”，立即可以开启下一场直播。
+Energy Drink (Stamina):
 
-精力药剂 (Energy Drink)：
+Scene: When stamina is depleted and the character needs to rest in town.
 
-场景：体力耗尽需回城休息时。
+Reward: Watch ad to instantly refill Stamina and continue exploring.
 
-奖励：看广告，瞬间回满体力，继续探索。
+7. UI/UX Aesthetics
 
-7. 交互与UI美学 (UI/UX)
+HUD:
 
-主界面 (HUD)：
+Top: Followers (Level), Septims (Currency), Current Location (e.g., Papercraft Dunes).
 
-顶部：粉丝数（等级）、金币（货币）、当前地理位置（如：Papercraft Dunes）。
+Middle: Side-scrolling Stage.
 
-中部：横向卷轴舞台。
+Bottom: Function Bar (Home, Bag/Materials, Skill Tree, Go Live Button).
 
-底部：功能栏（主页、背包/素材、技能树、开启直播按钮）。
+Feedback Design:
 
-反馈设计：
+Gold Acquisition: Coins are not just ticking numbers but physical paper coins falling and piling up in the corner, collectible by tapping.
 
-金币获取：金币不是数字跳动，而是物理掉落的纸片硬币，堆积在角落，点击可收集。
+Like Effect: Bubble-like hearts float up during streams (similar to TikTok live rooms).
 
-点赞效果：直播时屏幕会有气泡状的爱心浮起（类似抖音/TikTok直播间）。
+8. Roadmap
+
+P0 (Core Prototype): Implement auto-walking, material drops, and simple stream gold settlement.
+
+P1 (Art Production): Complete papercraft assets for the first 3 biomes (Woods, Desert, Snow).
+
+P2 (Numerical System): Implement Class System, Skill Tree values, and Ad placement logic.
+
+P3 (Polish): Add Copywriting Library, Comment Library, and Sound Effects.
