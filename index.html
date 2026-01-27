@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forest Blogger Adventure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+      /* --- Healing Forest Palettes --- */
+      :root {
+          /* Light Theme (Original Sage) */
+          --bg-color: #f7f9f2;
+          --container-bg: #e2e8ce;
+          --card-bg: #ffffff;
+          --text-main: #3a5a40;
+          --text-title: #344e41;
+          --accent-color: #a3b18a;
+          --accent-pop: #e67e22;
+          --border-color: #344e41;
+          --radius-lg: 30px;
+          --radius-md: 18px;
+          --border-width: 3px;
+          --font-title: 'Fredoka', cursive;
+          --font-body: 'Varela Round', sans-serif;
+          
+          /* Special: Dark text for white bubbles */
+          --text-on-white: #3a5a40; 
+      }
+
+      /* Dark Theme (Deep Woods) */
+      [data-theme="dark"] {
+          --bg-color: #1a2e1a;
+          --container-bg: #2d4a2d;
+          --card-bg: #2f4f38;
+          --text-main: #f0fdf4;
+          --text-title: #ffffff;
+          --accent-color: #588157;
+          --accent-pop: #f39c12;
+          --border-color: #8fbc8f;
+          --text-on-white: #1a2e1a; /* Use dark bg color as text on white */
+      }
+
+      /* Deep Green Theme */
+      [data-theme="deep-green"] {
+          --bg-color: #0d1f18;
+          --container-bg: #1b4332;
+          --card-bg: #2d6a4f;
+          --text-main: #d8f3dc;
+          --text-title: #ffffff;
+          --accent-color: #52b788;
+          --accent-pop: #198c56; 
+          --border-color: #74c69d;
+          --text-on-white: #0d1f18;
+      }
+
+      /* Pink Theme (Sakura) */
+      [data-theme="pink"] {
+          --bg-color: #fff0f3;
+          --container-bg: #ffccd5;
+          --card-bg: #ffffff;
+          --text-main: #590d22;
+          --text-title: #800f2f;
+          --accent-color: #ff8fa3;
+          --accent-pop: #ff4d6d;
+          --border-color: #a4133c;
+          --text-on-white: #590d22;
+      }
+
+      /* Blue Theme (Ocean) */
+      [data-theme="blue"] {
+          --bg-color: #e0f2fe;
+          --container-bg: #bae6fd;
+          --card-bg: #ffffff;
+          --text-main: #0c4a6e;
+          --text-title: #0369a1;
+          --accent-color: #7dd3fc;
+          --accent-pop: #0284c7;
+          --border-color: #075985;
+          --text-on-white: #0c4a6e;
+      }
+
+      /* Mono Transparent Theme */
+      [data-theme="mono"] {
+          --bg-color: #f2f2f2;
+          --container-bg: rgba(0, 0, 0, 0.05);
+          --card-bg: rgba(255, 255, 255, 0.8);
+          --text-main: #333333;
+          --text-title: #000000;
+          --accent-color: #999999;
+          --accent-pop: #444444;
+          --border-color: #111111;
+          --text-on-white: #000000;
+      }
+
+      * {
+          box-sizing: border-box;
+          transition: background-color 0.3s, color 0.3s, transform 0.2s, border-color 0.3s;
+      }
+
+      body {
+          background-color: var(--bg-color);
+          color: var(--text-main);
+          font-family: var(--font-body);
+          padding: 0;
+          margin: 0;
+          min-height: 100vh;
+          background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+          background-size: 40px 40px;
+          overflow-x: hidden;
+      }
+
+      /* Force form elements to use theme text color */
+      input, textarea, select, button {
+          color: var(--text-main);
+      }
+
+      .font-title { font-family: var(--font-title); }
+      .font-body { font-family: var(--font-body); }
+
+      /* --- Animation: Boiling Lines --- */
+      @keyframes squiggly-anim {
+          0% { filter: url('#squiggly-0'); }
+          25% { filter: url('#squiggly-1'); }
+          50% { filter: url('#squiggly-2'); }
+          75% { filter: url('#squiggly-3'); }
+          100% { filter: url('#squiggly-4'); }
+      }
+
+      @keyframes panning-bg {
+          from { background-position: 0 0; }
+          to { background-position: -2000px 0; }
+      }
+
+      @keyframes walking-step {
+          0%, 100% { transform: translateY(0) rotate(-1deg); }
+          50% { transform: translateY(-12px) rotate(1deg); }
+      }
+
+      .animate-panning {
+          animation: panning-bg 30s linear infinite;
+      }
+
+      .animate-walking {
+          animation: walking-step 0.6s ease-in-out infinite;
+      }
+
+      /* --- Wobbly Box Mixin --- */
+      .wobbly-box {
+          position: relative;
+          z-index: 1;
+          border: none !important; 
+      }
+
+      .wobbly-box::before {
+          content: "";
+          position: absolute;
+          top: -3px; left: -3px; right: -3px; bottom: -3px;
+          border: var(--border-width) solid var(--border-color);
+          border-radius: inherit;
+          z-index: -1;
+          background: inherit;
+          animation: squiggly-anim 0.35s linear infinite;
+          box-shadow: 6px 6px 0px rgba(0,0,0,0.15); 
+      }
+      
+      .wobbly-box-container::before {
+           box-shadow: 10px 10px 0px var(--border-color);
+           background: var(--container-bg);
+      }
+      
+      .bg-card-context::before { background: var(--card-bg); }
+      .bg-accent-context::before { 
+          background: var(--accent-color); 
+          border-color: var(--border-color);
+      }
+      .bg-overlay-context::before { 
+          background: var(--card-bg);
+          opacity: 0.95;
+          box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+      }
+
+      .nav-btn {
+          font-family: var(--font-title);
+          position: relative;
+          z-index: 1;
+          border: none;
+          background: transparent;
+      }
+      .nav-btn::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border: var(--border-width) solid transparent;
+          border-radius: 50px;
+          z-index: -1;
+          animation: squiggly-anim 0.3s linear infinite;
+      }
+      .nav-btn:hover::before, .nav-btn.active::before {
+          border-color: var(--border-color);
+          background: var(--accent-color);
+          box-shadow: 4px 4px 0px rgba(0,0,0,0.15);
+      }
+
+      /* Disable Animation Class (Static Squiggle) */
+      body.no-wobble .wobbly-box::before,
+      body.no-wobble .nav-btn::before {
+          animation: none !important;
+          filter: url('#squiggly-1'); /* Apply static distortion to maintain style */
+      }
+
+      ::-webkit-scrollbar { width: 12px; }
+      ::-webkit-scrollbar-track { background: var(--bg-color); }
+      ::-webkit-scrollbar-thumb { 
+          background: var(--border-color); 
+          border-radius: 20px;
+          border: 3px solid var(--bg-color);
+      }
+    </style>
+</head>
+  <body>
+    <svg style="display: none;">
+        <defs>
+            <filter id="squiggly-0">
+                <feTurbulence baseFrequency="0.02" numOctaves="3" result="noise" seed="0"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+            </filter>
+            <filter id="squiggly-1">
+                <feTurbulence baseFrequency="0.02" numOctaves="3" result="noise" seed="1"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" />
+            </filter>
+            <filter id="squiggly-2">
+                <feTurbulence baseFrequency="0.02" numOctaves="3" result="noise" seed="2"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+            </filter>
+            <filter id="squiggly-3">
+                <feTurbulence baseFrequency="0.02" numOctaves="3" result="noise" seed="3"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" />
+            </filter>
+            <filter id="squiggly-4">
+                <feTurbulence baseFrequency="0.02" numOctaves="3" result="noise" seed="4"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="1" />
+            </filter>
+        </defs>
+    </svg>
+    <div id="root"></div>
+    <script type="module" src="/main.ts"></script>
+  </body>
+</html>
