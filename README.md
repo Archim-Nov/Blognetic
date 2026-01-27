@@ -6,11 +6,11 @@
 
 ## English
 
-A forest adventure blogger simulation game built with Vue 3 + TypeScript + Pinia.
+A fantasy world travel blogger simulation game built with Vue 3 + TypeScript + Pinia.
 
 ### Introduction
 
-Blognetic is a unique web game where players take on the role of a blogger who has traveled to another world, exploring a fantasy forest, collecting materials, posting updates, and live streaming with viewers.
+Blognetic is a unique web game where you play as a blogger who has traveled to another world. Explore fantasy lands, collect materials, post adventure logs, and live stream to earn tips from viewers.
 
 ### Tech Stack
 
@@ -26,19 +26,21 @@ Blognetic is a unique web game where players take on the role of a blogger who h
 Blognetic/
 ├── App.vue                 # Main application component
 ├── main.ts                 # Application entry
-├── env.d.ts                # Vue SFC type declarations
 ├── types.ts                # TypeScript type definitions
-├── constants.ts            # Game constants and translations
-├── stores/                 # Pinia state management
-│   ├── index.ts            # Store exports
-│   ├── game.ts             # Game state store
-│   └── ui.ts               # UI state store
+├── constants.ts            # Game constants, careers, translations
+├── events.ts               # Game event definitions
+├── stores/
+│   ├── game.ts             # Game state, exploration, streaming logic
+│   └── ui.ts               # UI state, theme, language settings
 ├── services/
-│   └── geminiService.ts    # API service
+│   ├── aiService.ts        # OpenAI/Gemini API integration
+│   └── geminiService.ts    # Stream comment generation
 └── components/
-    ├── layout/             # Layout components
-    ├── exploration/        # Exploration components
-    └── streaming/          # Streaming components
+    ├── layout/             # Header, Hero, Settings, Modals
+    ├── exploration/        # Post input, Feed display
+    ├── streaming/          # Live streaming window
+    ├── growth/             # Character attributes & career panel
+    └── wardrobe/           # Character selection panel
 ```
 
 ### Quick Start
@@ -54,24 +56,37 @@ npm run dev
 npm run build
 ```
 
-Visit http://localhost:5173 to view the application.
+Or double-click `start.bat` on Windows.
+
+Visit http://localhost:5173 to play.
 
 ### Game Features
 
 #### Exploration System
-- Auto-exploration progress bar triggers random events when filled
-- Events are divided into C/B/A/S rarity levels
-- Exploration yields materials for streaming
+- Auto-exploration with progress bar
+- Random events with three rarity levels (Common/Uncommon/Rare)
+- Event outcomes based on attribute checks (success/failure)
+- Collect materials for streaming
 
-#### Post System
-- Auto-generated exploration logs
-- Manual posting support (text + images)
-- Dynamic card display with detail view
+#### Character System
+- **8 Attributes**: Strength, Intelligence, Willpower, Agility, Speed, Endurance, Personality, Luck
+- **Career System**: Multiple career categories with unique base stats and growth rates
+- **Level System**: Max level 100, max attribute 300
+- **Experience**: Gain EXP from exploration and streaming
 
 #### Streaming System
 - Start streaming when materials > 20
-- Streaming consumes materials, earns viewer tips
-- Real-time chat comment stream
+- Consumes materials, earns viewer donations
+- Real-time chat comments with random donations
+
+#### Character Wardrobe
+- 3 selectable characters: Forest Elf, Desert Knight, Abyssal Maiden
+- Each with unique artwork
+
+#### AI Integration (Optional)
+- Supports OpenAI-compatible APIs and Google Gemini
+- Auto-generates blog post content based on events
+- Configurable API endpoint, model, and key
 
 #### Theme System
 
@@ -84,19 +99,30 @@ Visit http://localhost:5173 to view the application.
 | Ocean | Blue theme |
 | Ink | Monochrome theme |
 
-#### Multi-language Support
-- 中文 (Chinese)
+#### Time & Weather System
+- Elder Scrolls-style calendar (12 months, 7-day weeks)
+- Dynamic weather: Sunny, Rainy, Cloudy, Stormy, Foggy, Snowy, Windy, Meteor Shower, Auroras, Acid Rain
+
+#### Exploration Maps
+- Emerald Whispering Woods
+- Arid Papercraft Dunes
+- Frozen Peaks of Cardboard
+- Tamriel Border Outpost
+- Abyssal Sukuyan Realm
+
+#### Multi-language
 - English
+- Chinese (中文)
 
 ---
 
 ## 中文
 
-一款基于 Vue 3 + TypeScript + Pinia 的森林冒险博主模拟游戏。
+一款基于 Vue 3 + TypeScript + Pinia 的奇幻世界旅行博主模拟游戏。
 
 ### 项目简介
 
-Blognetic 是一个独特的网页游戏，玩家扮演一位穿越异世界的博主，在奇幻森林中探索、收集素材、发布动态，并进行直播与观众互动。
+Blognetic 是一款独特的网页游戏，你将扮演一位穿越到异世界的博主。在奇幻大陆探索冒险、收集素材、发布探险日志，并通过直播获得观众打赏。
 
 ### 技术栈
 
@@ -112,19 +138,21 @@ Blognetic 是一个独特的网页游戏，玩家扮演一位穿越异世界的�
 Blognetic/
 ├── App.vue                 # 主应用组件
 ├── main.ts                 # 应用入口
-├── env.d.ts                # Vue SFC 类型声明
 ├── types.ts                # TypeScript 类型定义
-├── constants.ts            # 游戏常量和多语言翻译
-├── stores/                 # Pinia 状态管理
-│   ├── index.ts            # Store 导出
-│   ├── game.ts             # 游戏状态 Store
-│   └── ui.ts               # UI 状态 Store
+├── constants.ts            # 游戏常量、职业、翻译
+├── events.ts               # 游戏事件定义
+├── stores/
+│   ├── game.ts             # 游戏状态、探索、直播逻辑
+│   └── ui.ts               # UI 状态、主题、语言设置
 ├── services/
-│   └── geminiService.ts    # API 服务
+│   ├── aiService.ts        # OpenAI/Gemini API 集成
+│   └── geminiService.ts    # 直播评论生成
 └── components/
-    ├── layout/             # 布局组件
-    ├── exploration/        # 探索相关组件
-    └── streaming/          # 直播相关组件
+    ├── layout/             # 头部、主视觉、设置、模态框
+    ├── exploration/        # 发帖输入、动态流
+    ├── streaming/          # 直播窗口
+    ├── growth/             # 角色属性与职业面板
+    └── wardrobe/           # 角色换装面板
 ```
 
 ### 快速开始
@@ -140,24 +168,37 @@ npm run dev
 npm run build
 ```
 
-访问 http://localhost:5173 查看应用。
+或在 Windows 上双击 `start.bat` 启动。
+
+访问 http://localhost:5173 开始游戏。
 
 ### 游戏功能
 
 #### 探索系统
-- 自动探索进度条，每次填满触发随机事件
-- 事件分为 C/B/A/S 四个稀有度等级
-- 探索获得素材，用于直播消耗
+- 自动探索进度条
+- 随机事件，分为三种稀有度（普通/稀有/传说）
+- 事件结果基于属性检定（成功/失败）
+- 收集素材用于直播
 
-#### 动态系统
-- 自动生成探索日志
-- 支持用户手动发帖（文字+图片）
-- 动态卡片展示，点击查看详情
+#### 角色系统
+- **8 种属性**：力量、智力、意志、敏捷、速度、耐力、魅力、幸运
+- **职业系统**：多种职业类别，各有独特的初始属性和成长率
+- **等级系统**：最高 100 级，属性上限 300
+- **经验值**：通过探索和直播获得经验
 
 #### 直播系统
 - 素材 > 20 时可开启直播
-- 直播消耗素材，获得观众打赏
-- 实时聊天评论流
+- 消耗素材，获得观众打赏
+- 实时聊天评论流，随机打赏
+
+#### 角色换装
+- 3 个可选角色：森林精灵、沙漠骑士、深渊少女
+- 各有独特立绘
+
+#### AI 集成（可选）
+- 支持 OpenAI 兼容接口和 Google Gemini
+- 根据事件自动生成博文内容
+- 可配置 API 地址、模型和密钥
 
 #### 主题系统
 
@@ -170,14 +211,20 @@ npm run build
 | Ocean (海蓝) | 蓝色主题 |
 | Ink (水墨) | 单色主题 |
 
-#### 多语言支持
-- 中文 (zh)
-- English (en)
+#### 时间与天气系统
+- 上古卷轴风格日历（12 月份、7 天周期）
+- 动态天气：晴天、雨天、多云、暴风雨、雾天、雪天、大风、流星雨、极光、酸雨
 
-#### 其他功能
-- 摇晃动画效果开关
-- 上古卷轴风格的游戏内时间系统
-- 5 个不同的探索地图区域
+#### 探索地图
+- 翠绿低语森林
+- 干涸纸艺沙丘
+- 纸板冰冻巅峰
+- 泰姆瑞尔边境前哨
+- 深渊宿愿领域
+
+#### 多语言支持
+- English (英文)
+- 中文
 
 ---
 
