@@ -15,20 +15,20 @@ export const LOCATIONS = {
   ]
 };
 
-// Mapping locations to provided background images
+// Mapping locations to local background images
 export const LOCATION_ASSETS = [
-    "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSn1pVqs-ycjTblYGYp-hoQaVcDusGQACBDoAArdzuVbf1rRqes-7dTgE.png", // 翠绿低语森林
-    "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSnxpVqs8ICiLlN8dfPueQeo2-pzx5AACAzoAArdzuVaRByOGq3qv7jgE.png", // 干涸纸艺沙丘
-    "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSntpVqs4MQ1DdUMjN-JMVTEFqc9Z0AACAjoAArdzuVZ4DDTmv-_WPjgE.png",   // 纸板冰冻巅峰
-    "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSn1pVqs-ycjTblYGYp-hoQaVcDusGQACBDoAArdzuVbf1rRqes-7dTgE.png", // 边境前哨 (复用森林)
-    "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSntpVqs4MQ1DdUMjN-JMVTEFqc9Z0AACAjoAArdzuVZ4DDTmv-_WPjgE.png"    // 宿愿领域 (复用雪山)
+    "/assets/backgrounds/forest.png", // 翠绿低语森林
+    "/assets/backgrounds/desert.png", // 干涸纸艺沙丘
+    "/assets/backgrounds/snow.png",   // 纸板冰冻巅峰
+    "/assets/backgrounds/forest.png", // 边境前哨 (复用森林)
+    "/assets/backgrounds/snow.png"    // 宿愿领域 (复用雪山)
 ];
 
-// Mapping characters to provided sprites
+// Mapping characters to local sprites
 export const CHARACTER_ASSETS = [
-    "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSnlpVqs00fkHKGwyvDV-uZ9lg5aodgADOgACt3O5ViuTMx-4lvLVOAQ.png",    // 精灵 (对应森林)
-    "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSnhpVqswYPtVbSfn2Z8HT_Be-ntKpgAC_zkAArdzuVaE30QPKOwsvDgE.png", // 骑士 (对应沙漠/边境)
-    "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEPSnppVqs3l3tHPuNZzAv3gVkzBjSXYgACAToAArdzuVZ5_A_s-uRZaTgE.png" // 魅魔 (对应领域)
+    "/assets/characters/elf.png",      // 精灵 (对应森林)
+    "/assets/characters/knight.png",   // 骑士 (对应沙漠/边境)
+    "/assets/characters/succubus.png"  // 魅魔 (对应领域)
 ];
 
 export const TES_MONTHS = {
@@ -369,6 +369,8 @@ export const TRANSLATIONS = {
     cycle: "Day",
     weather: "Weather",
     exploring: "NOW EXPLORING",
+    resting: "RESTING",
+    continue: "Continue",
     // Growth page
     characterAttributes: "Character Attributes",
     attributePoints: "Attribute Points",
@@ -410,6 +412,8 @@ export const TRANSLATIONS = {
     cycle: "日",
     weather: "天气",
     exploring: "正在探索",
+    resting: "休息中",
+    continue: "继续旅行",
     // Growth page
     characterAttributes: "角色属性",
     attributePoints: "属性点数",

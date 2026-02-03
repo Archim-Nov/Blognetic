@@ -15,6 +15,11 @@ const props = defineProps<{
   characterLevel: number
   characterExperience: number
   expForNextLevel: number
+  isResting: boolean
+}>()
+
+const emit = defineEmits<{
+  (e: 'continue'): void
 }>()
 
 const t = () => TRANSLATIONS[props.lang]
@@ -22,7 +27,12 @@ const spriteUrl = () => {
   const char = CHARACTER_DATA.find(c => c.id === props.selectedCharacterId)
   return char ? char.asset : CHARACTER_DATA[0].asset
 }
-const bgUrl = () => LOCATION_ASSETS[props.locationIndex % LOCATION_ASSETS.length]
+const bgUrl = () => {
+  if (props.isResting) {
+    return '/assets/backgrounds/camp.png'
+  }
+  return LOCATION_ASSETS[props.locationIndex % LOCATION_ASSETS.length]
+}
 </script>
 
 <template>
@@ -30,7 +40,7 @@ const bgUrl = () => LOCATION_ASSETS[props.locationIndex % LOCATION_ASSETS.length
     <div class="wobbly-box bg-card-context h-[560px] rounded-[var(--radius-lg)] z-10 flex flex-col relative overflow-hidden group">
       <!-- Animated Panning Background -->
       <div
-        class="absolute inset-0 animate-panning bg-repeat-x"
+        :class="['absolute inset-0 bg-repeat-x', isResting ? '' : 'animate-panning']"
         :style="{
           backgroundImage: `url(${bgUrl()})`,
           backgroundSize: 'auto 100%',
@@ -40,7 +50,7 @@ const bgUrl = () => LOCATION_ASSETS[props.locationIndex % LOCATION_ASSETS.length
 
       <!-- Character Container -->
       <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
-        <div class="relative animate-walking">
+        <div :class="['relative', isResting ? '' : 'animate-walking']">
           <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-32 h-6 bg-black/20 blur-xl rounded-full"></div>
           <img
             :src="spriteUrl()"
@@ -65,8 +75,8 @@ const bgUrl = () => LOCATION_ASSETS[props.locationIndex % LOCATION_ASSETS.length
       <div class="absolute bottom-0 left-0 right-0 p-8 pt-16 bg-gradient-to-t from-black/50 via-black/20 to-transparent flex flex-col gap-4 z-30">
         <div class="flex flex-col md:flex-row justify-between items-center md:items-end gap-6 text-white drop-shadow-md">
           <div class="flex-1 w-full text-center md:text-left">
-            <div class="inline-block bg-[var(--accent-pop)] text-white px-4 py-1.5 rounded-full text-xs font-title mb-2 wobbly-box uppercase shadow-sm tracking-wider">
-              {{ t().exploring }}
+            <div :class="['inline-block text-white px-4 py-1.5 rounded-full text-xs font-title mb-2 wobbly-box uppercase shadow-sm tracking-wider', isResting ? 'bg-amber-500' : 'bg-[var(--accent-pop)]']">
+              {{ isResting ? t().resting : t().exploring }}
             </div>
             <h2 class="font-title text-3xl md:text-4xl leading-tight mb-2">{{ currentLocation }}</h2>
             <div class="flex gap-4 font-bold text-sm opacity-90 justify-center md:justify-start">
@@ -82,7 +92,7 @@ const bgUrl = () => LOCATION_ASSETS[props.locationIndex % LOCATION_ASSETS.length
                 <span>{{ t().energy }}</span>
               </div>
               <div class="font-title text-3xl leading-none text-white">
-                {{ energy }}<span class="text-xs ml-0.5">%</span>
+                {{ Math.floor(energy) }}<span class="text-xs ml-0.5">%</span>
               </div>
             </div>
 
@@ -115,6 +125,15 @@ const bgUrl = () => LOCATION_ASSETS[props.locationIndex % LOCATION_ASSETS.length
                 </div>
               </div>
             </div>
+
+            <!-- Continue Button -->
+            <button
+              v-if="isResting && energy >= 50"
+              @click="emit('continue')"
+              class="border-l border-white/20 pl-6 bg-[var(--accent-pop)] hover:opacity-80 text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg transition-all wobbly-box whitespace-nowrap"
+            >
+              {{ t().continue }}
+            </button>
           </div>
         </div>
 

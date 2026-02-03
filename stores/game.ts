@@ -17,6 +17,11 @@ const HOURS_PER_MOVE = 8
 const DAYS_PER_MAP = 8
 const HOURS_TO_CHANGE_MAP = 24 * DAYS_PER_MAP
 
+// Energy system constants
+const ENERGY_DRAIN_PER_PROGRESS = 0.2  // Energy drained per progress tick (100% / 10 full progress bars / 50 ticks per bar)
+const ENERGY_RECOVERY_DURATION = 30000  // 30 seconds to fully recover
+const ENERGY_RECOVERY_TICK_RATE = 100  // Update every 100ms for smooth animation
+
 // Event selection helper - weighted by rarity
 const selectRandomEvent = (): GameEvent => {
   const rarityWeights = { common: 60, uncommon: 30, rare: 10 }
@@ -133,6 +138,7 @@ export const useGameStore = defineStore('game', () => {
   const streamComments = ref<StreamComment[]>([])
   const explorationProgress = ref(0)
   const isProcessingEvent = ref(false)
+  const isResting = ref(false)  // Whether character is resting to recover energy
 
   // Character attributes (determined by career)
   const characterLevel = ref(1)
@@ -145,6 +151,7 @@ export const useGameStore = defineStore('game', () => {
 
   let explorationInterval: ReturnType<typeof setInterval> | null = null
   let streamInterval: ReturnType<typeof setInterval> | null = null
+  let energyRecoveryInterval: ReturnType<typeof setInterval> | null = null
 
   // Getters
   const canStartStream = computed(() => gameState.value.materials > 20)
@@ -314,12 +321,21 @@ export const useGameStore = defineStore('game', () => {
     if (explorationInterval) return
 
     explorationInterval = setInterval(() => {
-      if (gameState.value.isStreaming || isProcessingEvent.value) return
+      if (gameState.value.isStreaming || isProcessingEvent.value || isResting.value) return
 
       explorationProgress.value += 2
+
+      // Drain energy as progress advances
+      gameState.value.energy = Math.max(0, gameState.value.energy - ENERGY_DRAIN_PER_PROGRESS)
+
       if (explorationProgress.value >= 100) {
         explorationProgress.value = 0
-        handleExplorationEvent(lang())
+        // Check if energy depleted - enter camp rest after completing progress bar
+        if (gameState.value.energy <= 0) {
+          startEnergyRecovery()
+        } else {
+          handleExplorationEvent(lang())
+        }
       }
     }, EXPLORATION_TICK_RATE)
   }
@@ -329,6 +345,37 @@ export const useGameStore = defineStore('game', () => {
       clearInterval(explorationInterval)
       explorationInterval = null
     }
+  }
+
+  // Energy recovery system
+  const startEnergyRecovery = () => {
+    if (energyRecoveryInterval) return
+
+    isResting.value = true
+    gameState.value.energy = 0
+
+    const energyPerTick = 100 / (ENERGY_RECOVERY_DURATION / ENERGY_RECOVERY_TICK_RATE)
+
+    energyRecoveryInterval = setInterval(() => {
+      gameState.value.energy = Math.min(100, gameState.value.energy + energyPerTick)
+
+      // Auto-continue at 100%
+      if (gameState.value.energy >= 100) {
+        continueJourney()
+      }
+    }, ENERGY_RECOVERY_TICK_RATE)
+  }
+
+  const stopEnergyRecovery = () => {
+    if (energyRecoveryInterval) {
+      clearInterval(energyRecoveryInterval)
+      energyRecoveryInterval = null
+    }
+  }
+
+  const continueJourney = () => {
+    stopEnergyRecovery()
+    isResting.value = false
   }
 
   // Character attribute methods
@@ -431,6 +478,7 @@ export const useGameStore = defineStore('game', () => {
     streamComments,
     explorationProgress,
     isProcessingEvent,
+    isResting,
     canStartStream,
     isStreaming,
     handleExplorationEvent,
@@ -439,6 +487,7 @@ export const useGameStore = defineStore('game', () => {
     stopStream,
     startExplorationTick,
     stopExplorationTick,
+    continueJourney,
     characterLevel,
     characterExperience,
     currentCareerId,
